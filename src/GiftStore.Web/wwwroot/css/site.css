@@ -1,0 +1,39 @@
+/* GiftCardBuy - Production Persian RTL Stylesheet */
+@import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css');
+
+:root {
+    --font-sans: 'Vazirmatn', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    font-family: var(--font-sans);
+    direction: rtl;
+    text-align: right;
+}
+
+.dir-ltr {
+    direction: ltr !important;
+    text-align: left !important;
+}
+
+.filter-pill {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    background-color: #f3f4f6;
+    color: #4b5563;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.filter-pill:hover, .filter-pill.active {
+    background-color: #4f46e5;
+    color: #ffffff;
+}
+
+.product-card:hover {
+    border-color: #c7d2fe;
+    transform: translateY(-2px);
+}

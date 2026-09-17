@@ -1,0 +1,36 @@
+@page
+@model GiftStore.Web.Pages.Admin.Products.IndexModel
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "مدیریت محصولات و قیمت‌گذاری";
+}
+
+<h1 class="text-2xl font-black text-gray-900 mb-6">مدیریت محصولات فروشگاه و واریانت‌ها</h1>
+
+<div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+    <table class="w-full text-right text-xs">
+        <thead class="bg-gray-50 text-gray-500 border-b border-gray-100">
+            <tr>
+                <th class="p-3">عنوان محصول</th>
+                <th class="p-3">برند</th>
+                <th class="p-3">ریجن</th>
+                <th class="p-3">وضعیت انتشار</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+            @foreach (var p in Model.Products)
+            {
+                <tr>
+                    <td class="p-3 font-bold text-gray-900">@p.TitleFa</td>
+                    <td class="p-3 text-gray-500">@p.Brand</td>
+                    <td class="p-3 text-gray-500">@p.CountryCode</td>
+                    <td class="p-3">
+                        <span class="px-2 py-0.5 rounded text-xs font-bold @(p.IsPublished ? "bg-emerald-100 text-emerald-800" : "bg-gray-100 text-gray-800")">
+                            @(p.IsPublished ? "منتشر شده" : "پیش‌نویس")
+                        </span>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

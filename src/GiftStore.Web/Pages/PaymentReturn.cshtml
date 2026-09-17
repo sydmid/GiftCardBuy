@@ -1,0 +1,47 @@
+@page
+@model GiftStore.Web.Pages.PaymentReturnModel
+@{
+    ViewData["Title"] = Model.IsSuccess ? "پرداخت موفق" : "پرداخت ناموفق";
+}
+
+<div class="container mx-auto px-4 py-16 max-w-lg text-center">
+    @if (Model.IsSuccess)
+    {
+        <div class="bg-white rounded-2xl shadow-sm border border-emerald-100 p-8">
+            <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-3xl mx-auto mb-4">
+                ✓
+            </div>
+            <h1 class="text-2xl font-black text-gray-900 mb-2">پرداخت با موفقیت انجام شد!</h1>
+            <p class="text-sm text-gray-500 mb-6 leading-relaxed">
+                سفارش شما در سامانه ثبت و پردازش خودکار تامین کد گیفت‌کارت آغاز گردید.
+            </p>
+
+            <div class="bg-gray-50 rounded-xl p-4 text-xs space-y-2 mb-6 text-right">
+                <div class="flex justify-between">
+                    <span class="text-gray-500">شماره پیگیری درگاه:</span>
+                    <span class="font-bold text-gray-800">@Model.ReferenceCode</span>
+                </div>
+            </div>
+
+            <a href="/Account/OrderDetails?id=@Model.OrderId" class="block w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl transition text-sm">
+                مشاهده کد گیفت‌کارت در سفارش ⚡
+            </a>
+        </div>
+    }
+    else
+    {
+        <div class="bg-white rounded-2xl shadow-sm border border-red-100 p-8">
+            <div class="w-16 h-16 bg-red-100 text-red-600 rounded-full flex items-center justify-center text-3xl mx-auto mb-4">
+                ✕
+            </div>
+            <h1 class="text-2xl font-black text-gray-900 mb-2">تراکنش ناموفق</h1>
+            <p class="text-sm text-gray-500 mb-6 leading-relaxed">
+                @Model.ErrorMessage
+            </p>
+
+            <a href="/" class="inline-block py-2.5 px-6 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold rounded-xl transition text-sm">
+                بازگشت به صفحه اصلی
+            </a>
+        </div>
+    }
+</div>

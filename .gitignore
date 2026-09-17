@@ -1,0 +1,45 @@
+## Build and Binary Output
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+dist/
+build/
+
+## Visual Studio & IDEs
+.vs/
+.vscode/
+.idea/
+*.user
+*.userosscache
+*.sln.docstates
+*.suo
+*.userprefs
+*.dbmdl
+
+## .NET Core & OS
+project.lock.json
+project.fragment.lock.json
+artifacts/
+*.DotSettings.user
+.DS_Store
+Thumbs.db
+
+## Secrets, Credentials & Local Environment
+.env
+*.local.json
+appsettings.Production.json
+*.pfx
+*.key
+*.pem
+/DataProtection-Keys/
+
+## Test Results & Coverage
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+
+## Misc
+docs/
+docs/*

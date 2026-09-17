@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /Admin/
+Disallow: /Account/
+Disallow: /Checkout
+Disallow: /api/
+Allow: /
+
+Sitemap: https://giftcardbuy.ir/sitemap.xml

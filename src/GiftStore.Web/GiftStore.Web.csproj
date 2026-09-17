@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.0-preview.1.25080.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="10.0.0-preview.1.25080.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="10.0.0-preview.1.25080.5" />
+    <PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GiftStore.Application\GiftStore.Application.csproj" />
+    <ProjectReference Include="..\GiftStore.Cms\GiftStore.Cms.csproj" />
+    <ProjectReference Include="..\GiftStore.Infrastructure\GiftStore.Infrastructure.csproj" />
+    <ProjectReference Include="..\GiftStore.ServiceDefaults\GiftStore.ServiceDefaults.csproj" />
+  </ItemGroup>
+</Project>

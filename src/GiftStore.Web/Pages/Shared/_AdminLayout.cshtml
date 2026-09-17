@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - پنل مدیریت گیفتی‌کارت‌بای</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body class="bg-gray-100 text-gray-800 antialiased font-sans">
+    <div class="admin-wrapper flex min-h-screen">
+        <aside class="admin-sidebar w-64 bg-gray-900 text-white p-5 flex flex-col justify-between">
+            <div>
+                <div class="admin-brand font-black text-xl mb-8 flex items-center gap-2 text-indigo-400">
+                    <span>⚡ پنل مدیریت</span>
+                </div>
+                <nav class="space-y-3 text-sm">
+                    <a href="/Admin" class="block px-3 py-2 rounded hover:bg-gray-800 font-medium">داشبورد و آمار</a>
+                    <a href="/Admin/Orders" class="block px-3 py-2 rounded hover:bg-gray-800 font-medium">مدیریت سفارشات</a>
+                    <a href="/Admin/Products" class="block px-3 py-2 rounded hover:bg-gray-800 font-medium">محصولات و نرخ‌گذاری</a>
+                    <a href="/Admin/Supplier" class="block px-3 py-2 rounded hover:bg-gray-800 font-medium">تامین‌کننده Gift-i-Card</a>
+                    <a href="/Admin/Audit" class="block px-3 py-2 rounded hover:bg-gray-800 font-medium">گزارشات ممیزی امنیتی</a>
+                    <a href="http://localhost:5050/admin" target="_blank" class="block px-3 py-2 rounded hover:bg-gray-800 font-medium text-amber-400">
+                        مدیریت وبلاگ (Orchard Core) ↗
+                    </a>
+                </nav>
+            </div>
+            <div class="border-t border-gray-800 pt-4 text-xs text-gray-400">
+                <a href="/" class="text-indigo-400 hover:underline">بازگشت به فروشگاه</a>
+            </div>
+        </aside>
+        <main class="admin-main flex-1 p-8 overflow-y-auto">
+            <div class="container mx-auto">
+                @RenderBody()
+            </div>
+        </main>
+    </div>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

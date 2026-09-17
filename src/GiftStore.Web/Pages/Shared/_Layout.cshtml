@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - گیفتی‌کارت‌بای | خرید آنلاین گیفت کارت با تحویل فوری</title>
+    <meta name="description" content="@(ViewData["MetaDescription"] ?? "فروشگاه تخصصی خرید گیفت کارت اپل آمریکا، استیم والت، پلی‌استیشن و گوگل پلی با تحویل آنی و تضمین اصالت کد")" />
+    <link rel="canonical" href="@(ViewData["CanonicalUrl"] ?? "https://giftcardbuy.ir")" />
+    @if (ViewData["NoIndex"] as bool? == true)
+    {
+        <meta name="robots" content="noindex, nofollow" />
+    }
+    else
+    {
+        <meta name="robots" content="index, follow" />
+    }
+
+    <!-- Open Graph & Social Cards -->
+    <meta property="og:locale" content="fa_IR" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="@ViewData["Title"]" />
+    <meta property="og:description" content="@(ViewData["MetaDescription"] ?? "خرید اینترنتی گیفت کارت ارزی با تحویل آنی و پرداخت امن")" />
+    <meta property="og:site_name" content="GiftCardBuy" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    @RenderSection("Styles", required: false)
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased font-sans">
+    <!-- Header -->
+    <header class="header sticky top-0 z-40 bg-white shadow-sm border-b border-gray-100">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-6">
+                <a href="/" class="brand-logo flex items-center gap-2 text-indigo-600 font-black text-2xl tracking-tight">
+                    <span class="logo-icon">⚡</span>
+                    <span>گیفتی‌کارت‌بای</span>
+                </a>
+                <nav class="hidden md:flex items-center gap-5 text-sm font-medium text-gray-600">
+                    <a href="/" class="hover:text-indigo-600 transition">فروشگاه</a>
+                    <a href="/#products" class="hover:text-indigo-600 transition">انواع گیفت کارت</a>
+                    <a href="/Blog" class="hover:text-indigo-600 transition">مجله و راهنما</a>
+                    <a href="/Pages/Support" class="hover:text-indigo-600 transition">پشتیبانی</a>
+                    <a href="/Pages/ProhibitedUse" class="hover:text-indigo-600 transition">قوانین و مقررات</a>
+                </nav>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <a href="/Cart" class="btn-cart relative flex items-center gap-1.5 px-3 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium transition">
+                    <span>🛒</span>
+                    <span>سبد خرید</span>
+                    <span id="cart-badge" class="badge-count bg-indigo-600 text-white text-xs px-1.5 py-0.5 rounded-full">۰</span>
+                </a>
+
+                @if (User.Identity?.IsAuthenticated == true)
+                {
+                    <div class="dropdown-user relative">
+                        <a href="/Account/Orders" class="btn-user px-4 py-2 rounded-lg bg-indigo-50 text-indigo-700 text-sm font-semibold hover:bg-indigo-100 transition">
+                            <span>👤</span>
+                            <span>حساب کاربری (@User.Identity.Name)</span>
+                        </a>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a href="/Admin" class="btn-admin ml-2 px-3 py-2 rounded-lg bg-amber-500 text-white text-xs font-bold hover:bg-amber-600 transition">
+                                پنل مدیریت
+                            </a>
+                        }
+                        <form method="post" asp-page="/Account/Logout" class="inline">
+                            <button type="submit" class="text-xs text-red-600 hover:underline mr-2">خروج</button>
+                        </form>
+                    </div>
+                }
+                else
+                {
+                    <a href="/Account/Login" class="btn-login px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-semibold hover:bg-indigo-700 transition shadow-sm">
+                        ورود / ثبت‌نام
+                    </a>
+                }
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main role="main" class="min-h-[70vh]">
+        @RenderBody()
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 mt-16 pt-12 pb-8 border-t border-gray-800">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
+            <div>
+                <h4 class="text-white text-lg font-bold mb-4 flex items-center gap-2">
+                    <span>⚡ گیفتی‌کارت‌بای</span>
+                </h4>
+                <p class="text-sm text-gray-400 leading-relaxed">
+                    سامانه هوشمند و اتوماتیک توزیع انواع گیفت‌کارت‌های دیجیتال بین‌المللی با اتصال مستقیم به زیرساخت تامین و تحویل لحظه‌ای پس از تایید تراکنش بانکی.
+                </p>
+                <div class="mt-4 text-xs text-emerald-400 font-semibold flex items-center gap-1">
+                    <span>🛡️</span>
+                    <span>تحویل کد رمزنگاری شده و آنی</span>
+                </div>
+            </div>
+            <div>
+                <h5 class="text-white font-semibold mb-3">دسترسی سریع</h5>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="/" class="hover:text-white transition">فروشگاه گیفت کارت</a></li>
+                    <li><a href="/Blog" class="hover:text-white transition">وبلاگ و آموزش ردیم</a></li>
+                    <li><a href="/Account/Orders" class="hover:text-white transition">پیگیری سفارشات</a></li>
+                    <li><a href="/Pages/Support" class="hover:text-white transition">تماس و پشتیبانی ۲۴ ساعته</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="text-white font-semibold mb-3">قوانین و امنیت</h5>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="/Pages/Terms" class="hover:text-white transition">شرایط و ضوابط استفاده</a></li>
+                    <li><a href="/Pages/Privacy" class="hover:text-white transition">حریم خصوصی کاربران</a></li>
+                    <li><a href="/Pages/RefundPolicy" class="hover:text-white transition">قوانین استرداد وجه</a></li>
+                    <li><a href="/Pages/ProhibitedUse" class="hover:text-white transition">سلب مسئولیت و موارد ممنوعه</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="text-white font-semibold mb-3">پشتیبانی و اعتماد</h5>
+                <p class="text-sm text-gray-400 mb-3">
+                    پشتیبانی تلفنی و تیکت آنلاین: ۰۲۱-۹۱۳۰۰۱۴۲<br />
+                    پاسخگویی در تمامی روزهای هفته
+                </p>
+                <div class="trust-badges flex items-center gap-3 mt-4">
+                    <span class="badge-item bg-gray-800 px-3 py-2 rounded text-xs text-gray-300">درگاه امن شاپرک</span>
+                    <span class="badge-item bg-gray-800 px-3 py-2 rounded text-xs text-gray-300">SSL ۲۵۶ بیتی</span>
+                </div>
+            </div>
+        </div>
+        <div class="container mx-auto px-4 pt-6 border-t border-gray-800 text-center text-xs text-gray-500">
+            © ۱۴۰۵ تمامی حقوق برای پلتفرم گیفتی‌کارت‌بای محفوظ است.
+        </div>
+    </footer>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

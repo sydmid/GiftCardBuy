@@ -1,0 +1,46 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.0.35000.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiftStore.AppHost", "src\GiftStore.AppHost\GiftStore.AppHost.csproj", "{A0010001-0001-0001-0001-000000000001}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiftStore.ServiceDefaults", "src\GiftStore.ServiceDefaults\GiftStore.ServiceDefaults.csproj", "{A0010001-0001-0001-0001-000000000002}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiftStore.Contracts", "src\GiftStore.Contracts\GiftStore.Contracts.csproj", "{A0010001-0001-0001-0001-000000000003}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiftStore.Domain", "src\GiftStore.Domain\GiftStore.Domain.csproj", "{A0010001-0001-0001-0001-000000000004}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiftStore.Application", "src\GiftStore.Application\GiftStore.Application.csproj", "{A0010001-0001-0001-0001-000000000005}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiftStore.Gifticard", "src\GiftStore.Gifticard\GiftStore.Gifticard.csproj", "{A0010001-0001-0001-0001-000000000006}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiftStore.Payment", "src\GiftStore.Payment\GiftStore.Payment.csproj", "{A0010001-0001-0001-0001-000000000007}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiftStore.Infrastructure", "src\GiftStore.Infrastructure\GiftStore.Infrastructure.csproj", "{A0010001-0001-0001-0001-000000000008}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiftStore.Cms", "src\GiftStore.Cms\GiftStore.Cms.csproj", "{A0010001-0001-0001-0001-000000000009}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiftStore.Web", "src\GiftStore.Web\GiftStore.Web.csproj", "{A0010001-0001-0001-0001-000000000010}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiftStore.Domain.Tests", "tests\GiftStore.Domain.Tests\GiftStore.Domain.Tests.csproj", "{B0010001-0001-0001-0001-000000000001}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiftStore.Application.Tests", "tests\GiftStore.Application.Tests\GiftStore.Application.Tests.csproj", "{B0010001-0001-0001-0001-000000000002}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiftStore.Infrastructure.Tests", "tests\GiftStore.Infrastructure.Tests\GiftStore.Infrastructure.Tests.csproj", "{B0010001-0001-0001-0001-000000000003}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiftStore.Gifticard.IntegrationTests", "tests\GiftStore.Gifticard.IntegrationTests\GiftStore.Gifticard.IntegrationTests.csproj", "{B0010001-0001-0001-0001-000000000004}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiftStore.Web.E2ETests", "tests\GiftStore.Web.E2ETests\GiftStore.Web.E2ETests.csproj", "{B0010001-0001-0001-0001-000000000005}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A0010001-0001-0001-0001-000000000001}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0010001-0001-0001-0001-000000000001}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0010001-0001-0001-0001-000000000010}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0010001-0001-0001-0001-000000000010}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+EndGlobal

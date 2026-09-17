@@ -1,0 +1,53 @@
+@page
+@model GiftStore.Web.Pages.Account.OrdersModel
+@{
+    ViewData["Title"] = "تاریخچه سفارشات من";
+}
+
+<div class="container mx-auto px-4 py-10 max-w-4xl">
+    <h1 class="text-2xl font-black text-gray-900 mb-6">سفارشات من</h1>
+
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+        @if (Model.Orders.Count == 0)
+        {
+            <div class="p-8 text-center text-sm text-gray-500">
+                هنوز سفارشی ثبت نکرده‌اید.
+                <a href="/" class="text-indigo-600 hover:underline font-bold block mt-2">مشاهده گیفت کارت‌ها</a>
+            </div>
+        }
+        else
+        {
+            <table class="w-full text-right text-xs">
+                <thead class="bg-gray-50 text-gray-500 border-b border-gray-100">
+                    <tr>
+                        <th class="p-4">شماره سفارش</th>
+                        <th class="p-4">تاریخ</th>
+                        <th class="p-4">مبلغ</th>
+                        <th class="p-4">وضعیت</th>
+                        <th class="p-4 text-left">عملیات</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100">
+                    @foreach (var order in Model.Orders)
+                    {
+                        <tr class="hover:bg-gray-50 transition">
+                            <td class="p-4 font-bold text-gray-900">@order.OrderNumber</td>
+                            <td class="p-4 text-gray-500">@order.CreatedAtUtc.ToLocalTime().ToString("yyyy/MM/dd HH:mm")</td>
+                            <td class="p-4 font-bold text-indigo-700">@order.TotalAmountToman.ToString("N0") تومان</td>
+                            <td class="p-4">
+                                <span class="px-2.5 py-1 rounded-full text-xs font-bold @(order.Status == OrderStatus.Fulfilled ? "bg-emerald-100 text-emerald-800" : "bg-amber-100 text-amber-800")">
+                                    @order.Status
+                                </span>
+                            </td>
+                            <td class="p-4 text-left">
+                                <a href="/Account/OrderDetails?id=@order.Id" class="text-indigo-600 hover:underline font-bold">
+                                    مشاهده و کدها ←
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>

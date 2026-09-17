@@ -1,0 +1,52 @@
+@page
+@model GiftStore.Web.Pages.Admin.Orders.IndexModel
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "مدیریت سفارشات";
+}
+
+<div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-black text-gray-900">مدیریت سفارشات و پیگیری تامین</h1>
+</div>
+
+<div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+    <table class="w-full text-right text-xs">
+        <thead class="bg-gray-50 text-gray-500 border-b border-gray-100">
+            <tr>
+                <th class="p-3">شناسه</th>
+                <th class="p-3">مشتری</th>
+                <th class="p-3">مبلغ</th>
+                <th class="p-3">وضعیت</th>
+                <th class="p-3">توضیحات وضعیت</th>
+                <th class="p-3 text-left">عملیات</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+            @foreach (var o in Model.Orders)
+            {
+                <tr>
+                    <td class="p-3 font-bold text-gray-900">@o.OrderNumber</td>
+                    <td class="p-3 text-gray-500">@o.CustomerEmail</td>
+                    <td class="p-3 font-bold text-indigo-600">@o.TotalAmountToman.ToString("N0") تومان</td>
+                    <td class="p-3">
+                        <span class="px-2 py-0.5 rounded text-xs font-bold @(o.Status == OrderStatus.Fulfilled ? "bg-emerald-100 text-emerald-800" : (o.Status == OrderStatus.ManualReviewRequired ? "bg-red-100 text-red-800" : "bg-gray-100 text-gray-800"))">
+                            @o.Status
+                        </span>
+                    </td>
+                    <td class="p-3 text-gray-500">@(o.StatusNote ?? "-")</td>
+                    <td class="p-3 text-left">
+                        @if (o.Status == OrderStatus.ManualReviewRequired || o.Status == OrderStatus.FulfillmentFailed)
+                        {
+                            <form method="post" asp-page-handler="Retry" class="inline">
+                                <input type="hidden" name="orderId" value="@o.Id" />
+                                <button type="submit" class="px-2.5 py-1 bg-indigo-600 text-white font-bold rounded hover:bg-indigo-700 text-xs">
+                                    تلاش مجدد
+                                </button>
+                            </form>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

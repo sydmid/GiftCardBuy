@@ -1,0 +1,109 @@
+@page
+@model GiftStore.Web.Pages.IndexModel
+@{
+    ViewData["Title"] = "خرید گیفت کارت ارزی و بین‌المللی";
+    ViewData["MetaDescription"] = "فروشگاه آنلاین انواع گیفت کارت اپل آمریکا، استیم والت، پلی استیشن و گوگل پلی با تحویل آنی کد پس از پرداخت";
+}
+
+<section class="hero-section bg-gradient-to-r from-indigo-700 via-indigo-800 to-purple-900 text-white py-16">
+    <div class="container mx-auto px-4 text-center max-w-3xl">
+        <span class="inline-block bg-indigo-500/30 text-indigo-200 text-xs px-3 py-1 rounded-full font-semibold mb-4 backdrop-blur-sm border border-indigo-400/20">
+            تحویل آنی کدهای دیجیتال ⚡
+        </span>
+        <h1 class="text-3xl md:text-5xl font-black mb-6 leading-tight">
+            خرید مطمئن و فوری گیفت کارت‌های بین‌المللی
+        </h1>
+        <p class="text-base md:text-lg text-indigo-100 mb-8 leading-relaxed">
+            تامین مستقیم و امن گیفت‌کارت‌های اپل، استیم، پلی‌استیشن و گوگل‌پلی بدون واسطه و با تضمین اصالت صد در صدی کدها.
+        </p>
+
+        <!-- Search Bar -->
+        <form method="get" class="search-form flex items-center bg-white rounded-xl shadow-lg p-2 max-w-xl mx-auto text-gray-800">
+            <input type="text" name="SearchQuery" value="@Model.SearchQuery" placeholder="جستجوی نام گیفت کارت، کشور یا برند..." class="flex-1 px-4 py-2 outline-none text-sm bg-transparent" />
+            <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2.5 rounded-lg text-sm font-semibold transition">
+                جستجو
+            </button>
+        </form>
+    </div>
+</section>
+
+<!-- Product Catalog -->
+<section id="products" class="catalog-section py-12 container mx-auto px-4">
+    <div class="flex flex-col md:flex-row items-center justify-between mb-8 gap-4">
+        <div>
+            <h2 class="text-2xl font-bold text-gray-900">محصولات منتخب گیفت کارت</h2>
+            <p class="text-sm text-gray-500 mt-1">کارت مورد نظر خود را انتخاب کنید و در کمتر از چند ثانیه دریافت نمایید.</p>
+        </div>
+
+        <!-- Brand Filter Tabs -->
+        <div class="brand-filters flex items-center gap-2 overflow-x-auto pb-2">
+            <a href="/" class="filter-pill @(Model.SelectedBrand == null ? "active" : "")">همه</a>
+            <a href="/?brand=Apple" class="filter-pill @(Model.SelectedBrand == CardBrand.Apple ? "active" : "")">اپل (Apple)</a>
+            <a href="/?brand=Steam" class="filter-pill @(Model.SelectedBrand == CardBrand.Steam ? "active" : "")">استیم (Steam)</a>
+            <a href="/?brand=PlayStation" class="filter-pill @(Model.SelectedBrand == CardBrand.PlayStation ? "active" : "")">پلی‌استیشن (PSN)</a>
+            <a href="/?brand=GooglePlay" class="filter-pill @(Model.SelectedBrand == CardBrand.GooglePlay ? "active" : "")">گوگل پلی</a>
+        </div>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        @foreach (var prod in Model.Products)
+        {
+            <div class="product-card bg-white rounded-2xl p-5 border border-gray-100 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                <div>
+                    <div class="card-badge-row flex justify-between items-center mb-3">
+                        <span class="region-badge bg-blue-50 text-blue-700 text-xs px-2.5 py-1 rounded-md font-semibold">
+                            ریجن @prod.CountryCode
+                        </span>
+                        <span class="text-xs text-emerald-600 font-medium">⚡ موجود و تحویل آنی</span>
+                    </div>
+
+                    <div class="icon-wrap w-16 h-16 bg-gray-100 rounded-xl flex items-center justify-center text-3xl mb-4">
+                        @if (prod.Brand == CardBrand.Apple) { <span>🍎</span> }
+                        else if (prod.Brand == CardBrand.Steam) { <span>🎮</span> }
+                        else if (prod.Brand == CardBrand.PlayStation) { <span>🕹️</span> }
+                        else { <span>🎁</span> }
+                    </div>
+
+                    <h3 class="product-title font-bold text-gray-900 text-base mb-2">@prod.TitleFa</h3>
+                    <p class="product-desc text-xs text-gray-500 line-clamp-2 mb-4 leading-relaxed">
+                        @prod.DescriptionFa
+                    </p>
+                </div>
+
+                <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                    <div>
+                        <span class="text-xs text-gray-400 block">شروع قیمت از:</span>
+                        <span class="price-val font-black text-indigo-700 text-sm">
+                            @prod.LowestPriceToman.ToString("N0") <span class="text-xs font-normal">تومان</span>
+                        </span>
+                    </div>
+                    <a href="/Product?slug=@prod.Slug" class="btn-buy bg-indigo-50 hover:bg-indigo-600 hover:text-white text-indigo-700 px-4 py-2 rounded-lg text-xs font-bold transition">
+                        انتخاب اعتبار
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+<!-- Features Row -->
+<section class="features-section bg-gray-100 py-12">
+    <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+        <div class="feature-item p-6 bg-white rounded-xl shadow-sm">
+            <div class="text-3xl mb-2">⚡</div>
+            <h4 class="font-bold text-gray-900 mb-2">تحویل خودکار و لحظه‌ای</h4>
+            <p class="text-xs text-gray-500 leading-relaxed">بلافاصله بعد از پرداخت موفق، کد اورجینال در حساب کاربری شما قرار می‌گیرد.</p>
+        </div>
+        <div class="feature-item p-6 bg-white rounded-xl shadow-sm">
+            <div class="text-3xl mb-2">🔒</div>
+            <h4 class="font-bold text-gray-900 mb-2">امنیت و ذخیره‌سازی رمزنگاری‌شده</h4>
+            <p class="text-xs text-gray-500 leading-relaxed">کدها در سرور با الگوریتم‌های استاندارد بانکی محافظت شده و تنها به شما نمایش داده می‌شوند.</p>
+        </div>
+        <div class="feature-item p-6 bg-white rounded-xl shadow-sm">
+            <div class="text-3xl mb-2">📞</div>
+            <h4 class="font-bold text-gray-900 mb-2">پشتیبانی و اصالت قطعی</h4>
+            <p class="text-xs text-gray-500 leading-relaxed">تمامی کارت‌ها مستقیماً از سورس معتبر Gift-i-Card شارژ و استعلام می‌شوند.</p>
+        </div>
+    </div>
+</section>

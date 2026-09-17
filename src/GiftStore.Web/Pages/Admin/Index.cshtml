@@ -1,0 +1,56 @@
+@page
+@model GiftStore.Web.Pages.Admin.IndexModel
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "داشبورد عملیاتی";
+}
+
+<h1 class="text-2xl font-black text-gray-900 mb-6">داشبورد و وضعیت عملکرد فروشگاه</h1>
+
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+        <span class="text-xs text-gray-400 block mb-1">مجموع کل سفارشات</span>
+        <span class="text-2xl font-black text-gray-900">@Model.TotalOrdersCount</span>
+    </div>
+    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+        <span class="text-xs text-gray-400 block mb-1">سفارشات موفق تکمیل‌شده</span>
+        <span class="text-2xl font-black text-emerald-600">@Model.FulfilledOrdersCount</span>
+    </div>
+    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+        <span class="text-xs text-gray-400 block mb-1">صف بررسی دستی (Manual Review)</span>
+        <span class="text-2xl font-black text-amber-600">@Model.ManualReviewQueueCount</span>
+    </div>
+    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+        <span class="text-xs text-gray-400 block mb-1">کل درآمد فروش (تومان)</span>
+        <span class="text-xl font-black text-indigo-700">@Model.TotalRevenueToman.ToString("N0")</span>
+    </div>
+</div>
+
+<div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+    <h2 class="font-bold text-gray-900 mb-4 pb-2 border-b border-gray-100">آخرین سفارشات ثبتی</h2>
+    <table class="w-full text-right text-xs">
+        <thead class="bg-gray-50 text-gray-500">
+            <tr>
+                <th class="p-3">شماره سفارش</th>
+                <th class="p-3">ایمیل مشتری</th>
+                <th class="p-3">مبلغ</th>
+                <th class="p-3">وضعیت</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+            @foreach (var o in Model.RecentOrders)
+            {
+                <tr>
+                    <td class="p-3 font-bold">@o.OrderNumber</td>
+                    <td class="p-3 text-gray-500">@o.CustomerEmail</td>
+                    <td class="p-3 font-bold text-indigo-600">@o.TotalAmountToman.ToString("N0") تومان</td>
+                    <td class="p-3">
+                        <span class="px-2 py-0.5 rounded text-xs font-bold @(o.Status == OrderStatus.Fulfilled ? "bg-emerald-100 text-emerald-800" : "bg-gray-100 text-gray-800")">
+                            @o.Status
+                        </span>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,40 @@
+@page
+@model GiftStore.Web.Pages.Blog.IndexModel
+@{
+    ViewData["Title"] = "مجله تخصصی و راهنمای گیفت کارت";
+    ViewData["MetaDescription"] = "آموزش گام به گام ساخت اپل آیدی آمریکا، ردیم کدهای استیم، پلی‌استیشن و ترفندهای خرید اکانت‌های بین‌المللی";
+}
+
+<div class="container mx-auto px-4 py-12 max-w-5xl">
+    <div class="text-center mb-12">
+        <h1 class="text-3xl font-black text-gray-900 mb-3">مجله و راهنمای گیفتی‌کارت‌بای</h1>
+        <p class="text-sm text-gray-500">آخرین آموزش‌ها، راهنماهای شارژ اکانت و بررسی‌های فنی سرویس‌های بین‌المللی</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        @foreach (var article in Model.Articles)
+        {
+            <article class="article-card bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                <div class="p-6">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="bg-indigo-50 text-indigo-700 text-xs px-2.5 py-0.5 rounded-full font-bold">@article.CategoryName</span>
+                        <span class="text-xs text-gray-400">@article.PublishedDateUtc.ToString("yyyy/MM/dd")</span>
+                    </div>
+
+                    <h2 class="text-lg font-bold text-gray-900 mb-3 hover:text-indigo-600 transition">
+                        <a href="/Blog/Post?slug=@article.Slug">@article.Title</a>
+                    </h2>
+
+                    <p class="text-xs text-gray-500 leading-relaxed mb-4">
+                        @article.Excerpt
+                    </p>
+                </div>
+
+                <div class="p-6 pt-0 border-t border-gray-50 flex items-center justify-between text-xs text-gray-400">
+                    <span>نویسنده: @article.AuthorName</span>
+                    <a href="/Blog/Post?slug=@article.Slug" class="text-indigo-600 font-bold hover:underline">مطالعه مقاله ←</a>
+                </div>
+            </article>
+        }
+    </div>
+</div>

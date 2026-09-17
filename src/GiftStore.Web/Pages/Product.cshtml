@@ -1,0 +1,82 @@
+@page
+@model GiftStore.Web.Pages.ProductModel
+@{
+    ViewData["Title"] = Model.Product?.TitleFa ?? "جزئیات محصول";
+}
+
+@if (Model.Product == null)
+{
+    <div class="container mx-auto px-4 py-16 text-center">
+        <h2 class="text-2xl font-bold text-gray-800">محصول مورد نظر یافت نشد.</h2>
+        <a href="/" class="text-indigo-600 hover:underline mt-4 inline-block">بازگشت به فروشگاه</a>
+    </div>
+}
+else
+{
+    <div class="container mx-auto px-4 py-10 max-w-5xl">
+        <nav class="breadcrumb text-xs text-gray-500 mb-6 flex items-center gap-2">
+            <a href="/" class="hover:text-indigo-600">خانه</a>
+            <span>/</span>
+            <a href="/#products" class="hover:text-indigo-600">گیفت کارت</a>
+            <span>/</span>
+            <span class="text-gray-800 font-semibold">@Model.Product.TitleFa</span>
+        </nav>
+
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+                <div class="w-full h-64 bg-indigo-50/50 rounded-2xl flex items-center justify-center text-7xl mb-4 border border-indigo-100">
+                    @if (Model.Product.Brand == CardBrand.Apple) { <span>🍎</span> }
+                    else if (Model.Product.Brand == CardBrand.Steam) { <span>🎮</span> }
+                    else if (Model.Product.Brand == CardBrand.PlayStation) { <span>🕹️</span> }
+                    else { <span>🎁</span> }
+                </div>
+
+                <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 text-xs text-amber-900 leading-relaxed">
+                    <strong class="font-bold block mb-1">⚠️ نکات مهم پیش از خرید:</strong>
+                    @Model.Product.InstructionsFa
+                </div>
+            </div>
+
+            <div>
+                <h1 class="text-2xl font-black text-gray-900 mb-2">@Model.Product.TitleFa</h1>
+                <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2.5 py-1 rounded font-semibold mb-4">
+                    ریجن رسمی @Model.Product.CountryCode
+                </span>
+
+                <p class="text-sm text-gray-600 leading-relaxed mb-6">
+                    @Model.Product.DescriptionFa
+                </p>
+
+                <form method="post" asp-page-handler="BuyNow">
+                    <input type="hidden" name="Slug" value="@Model.Product.Slug" />
+
+                    <label class="block text-sm font-bold text-gray-800 mb-2">انتخاب اعتبار گیفت کارت:</label>
+                    <div class="variants-selector space-y-2 mb-6">
+                        @foreach (var v in Model.Variants)
+                        {
+                            <label class="variant-option block p-3 rounded-xl border border-gray-200 hover:border-indigo-500 cursor-pointer transition flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <input type="radio" name="SelectedVariantMappingId" value="@v.MappingId" @(v == Model.Variants.First() ? "checked" : "") class="accent-indigo-600" />
+                                    <span class="font-bold text-sm text-gray-800">@v.DisplayTitleFa</span>
+                                </div>
+                                <span class="text-indigo-700 font-black text-sm">
+                                    @v.CalculatedPriceToman.ToString("N0") <span class="text-xs font-normal">تومان</span>
+                                </span>
+                            </label>
+                        }
+                    </div>
+
+                    <div class="flex items-center gap-4 mb-6">
+                        <label class="text-sm font-bold text-gray-800">تعداد:</label>
+                        <input type="number" name="Quantity" value="1" min="1" max="5" class="w-20 p-2 border border-gray-300 rounded-lg text-center font-bold outline-none" />
+                    </div>
+
+                    <button type="submit" class="w-full py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold text-base shadow-md hover:shadow-lg transition flex items-center justify-center gap-2">
+                        <span>⚡</span>
+                        <span>خرید آنی و دریافت کد</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+}

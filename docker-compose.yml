@@ -1,0 +1,77 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: giftcardbuy-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: YourSecurePassword123!
+      POSTGRES_MULTIPLE_DATABASES: giftcardbuy_db,giftcardbuy_cms
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-multiple-db.sh:/docker-entrypoint-initdb.d/init-multiple-db.sh:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: giftcardbuy-redis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  giftstore-cms:
+    build:
+      context: .
+      dockerfile: src/GiftStore.Cms/Dockerfile
+    container_name: giftcardbuy-cms
+    restart: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ConnectionStrings__CmsConnection=Host=postgres;Port=5432;Database=giftcardbuy_cms;Username=postgres;Password=YourSecurePassword123!
+    ports:
+      - "5050:5050"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  giftstore-web:
+    build:
+      context: .
+      dockerfile: src/GiftStore.Web/Dockerfile
+    container_name: giftcardbuy-web
+    restart: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=giftcardbuy_db;Username=postgres;Password=YourSecurePassword123!
+      - ConnectionStrings__Redis=redis:6379
+      - Cms__BaseUrl=http://giftstore-cms:5050/
+      - Gifticard__UseFakeInDevelopment=true
+      - Payment__Provider=Fake
+    ports:
+      - "7001:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      giftstore-cms:
+        condition: service_started
+
+volumes:
+  postgres_data:
+  redis_data:

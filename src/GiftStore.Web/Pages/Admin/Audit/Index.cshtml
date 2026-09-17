@@ -1,0 +1,34 @@
+@page
+@model GiftStore.Web.Pages.Admin.Audit.IndexModel
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "گزارش ممیزی امنیتی";
+}
+
+<h1 class="text-2xl font-black text-gray-900 mb-6">گزارش ممیزی امنیتی و افشای کدهای کارت</h1>
+
+<div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+    <table class="w-full text-right text-xs">
+        <thead class="bg-gray-50 text-gray-500 border-b border-gray-100">
+            <tr>
+                <th class="p-3">نوع رویداد</th>
+                <th class="p-3">کاربر</th>
+                <th class="p-3">آدرس IP</th>
+                <th class="p-3">تاریخ</th>
+                <th class="p-3">جزئیات</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+            @foreach (var a in Model.AuditEvents)
+            {
+                <tr>
+                    <td class="p-3 font-bold text-gray-900">@a.EventType</td>
+                    <td class="p-3 text-gray-500">@a.PerformedByUserId</td>
+                    <td class="p-3 font-mono text-gray-500">@a.IpAddress</td>
+                    <td class="p-3 text-gray-500">@a.CreatedAtUtc.ToLocalTime().ToString("yyyy/MM/dd HH:mm:ss")</td>
+                    <td class="p-3 font-mono text-gray-400 text-[10px]">@a.DetailsJson</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

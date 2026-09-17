@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.11.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.0-preview.1.25080.5" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GiftStore.Contracts\GiftStore.Contracts.csproj" />
+    <ProjectReference Include="..\GiftStore.Domain\GiftStore.Domain.csproj" />
+    <ProjectReference Include="..\GiftStore.Gifticard\GiftStore.Gifticard.csproj" />
+    <ProjectReference Include="..\GiftStore.Payment\GiftStore.Payment.csproj" />
+  </ItemGroup>
+</Project>
