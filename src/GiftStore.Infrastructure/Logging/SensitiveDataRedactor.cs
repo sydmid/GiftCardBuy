@@ -14,8 +14,8 @@ public static partial class SensitiveDataRedactor
         if (string.IsNullOrEmpty(input)) return input;
 
         var redacted = BearerTokenRegex.Replace(input, "Bearer [REDACTED_TOKEN]");
-        redacted = GiftCardCodeRegex.Replace(redacted, "code:"[REDACTED_GIFT_CODE]"");
-        redacted = PasswordRegex.Replace(redacted, "secret:"[REDACTED_SECRET]"");
+        redacted = GiftCardCodeRegex.Replace(redacted, "code:\"[REDACTED_GIFT_CODE]\"");
+        redacted = PasswordRegex.Replace(redacted, "secret:\"[REDACTED_SECRET]\"");
         return redacted;
     }
 }

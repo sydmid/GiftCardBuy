@@ -43,7 +43,7 @@ public class FakePaymentGateway : IPaymentGateway
                 IsSuccess: false,
                 GatewayTransactionId: string.Empty,
                 ReferenceCode: null,
-                RawResponse: "{"status":"NOK","message":"User cancelled transaction"}",
+                RawResponse: """{"status":"NOK","message":"User cancelled transaction"}""",
                 ErrorMessage: "تراکنش توسط کاربر لغو شد یا ناموفق بود."
             ));
         }
@@ -55,7 +55,7 @@ public class FakePaymentGateway : IPaymentGateway
             IsSuccess: true,
             GatewayTransactionId: $"TX-{refNumber}",
             ReferenceCode: refNumber,
-            RawResponse: $"{{"status":100,"ref_id":"{refNumber}","amount":{request.ExpectedAmountToman}}}",
+            RawResponse: $$"""{"status":100,"ref_id":"{{refNumber}}","amount":{{request.ExpectedAmountToman}}}""",
             ErrorMessage: null
         ));
     }

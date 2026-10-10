@@ -44,7 +44,7 @@ public class ZarinpalPaymentGateway : IPaymentGateway
                 IsSuccess: false,
                 GatewayTransactionId: string.Empty,
                 ReferenceCode: null,
-                RawResponse: "{"status":"NOK"}",
+                RawResponse: """{"status":"NOK"}""",
                 ErrorMessage: "پرداخت از طرف درگاه بانکی تایید نشد."
             ));
         }
@@ -54,7 +54,7 @@ public class ZarinpalPaymentGateway : IPaymentGateway
             IsSuccess: true,
             GatewayTransactionId: $"ZP-{refId}",
             ReferenceCode: refId,
-            RawResponse: $"{{"Status":100,"RefID":{refId}}}",
+            RawResponse: $$"""{"Status":100,"RefID":"{{refId}}"}""",
             ErrorMessage: null
         ));
     }
