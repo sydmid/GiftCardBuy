@@ -19,7 +19,7 @@ public class SensitiveDataRedactionTests
     [Fact]
     public void Redact_ShouldMaskGiftCardCodesAndPins()
     {
-        var rawLog = "Retrieved response: code:"XABCD1234567890" from supplier";
+        var rawLog = "Retrieved response: code:\"XABCD1234567890\" from supplier";
         var redacted = SensitiveDataRedactor.Redact(rawLog);
 
         redacted.Should().NotContain("XABCD1234567890");
